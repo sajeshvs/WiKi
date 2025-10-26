@@ -402,6 +402,212 @@
         .accordion.active .accordion-icon {
             transform: rotate(180deg);
         }
+
+        .phone-screen {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-display {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 25px;
+            background: #1a1a1a;
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .phone-content {
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .settings-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .settings-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-item:hover {
+            background: #f8f9fa;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            left: 26px;
+        }
+
+        .visual-guide {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .visual-step {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .icon-large {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+
+        .connection-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .device-icon {
+            text-align: center;
+        }
+
+        .device-icon .icon-large {
+            font-size: 5em;
+            margin: 10px 0;
+        }
+
+        .arrow-icon {
+            font-size: 3em;
+            color: #667eea;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .screenshot-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 20px 0;
+            color: #667eea;
+        }
+
+        .file-explorer-mockup {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .explorer-toolbar {
+            background: #f0f0f0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        .explorer-address {
+            background: white;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+
+        .explorer-content {
+            padding: 15px;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .folder-item:hover {
+            background: #f8f9fa;
+        }
+
+        .folder-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .cmd-window {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .cmd-prompt {
+            color: #00ff00;
+        }
+
+        .cmd-output {
+            color: #ffffff;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -416,6 +622,36 @@
                 <h3>📱 Device: Samsung Galaxy S21 Ultra</h3>
                 <p><strong>Issue:</strong> Phone storage almost full with photos, videos, WhatsApp data (including cloned apps), and downloads</p>
                 <p><strong>Solution:</strong> Complete backup using ADB or Windows MTP</p>
+            </div>
+
+            <div class="visual-guide">
+                <div class="visual-step">
+                    <div class="icon-large">🔧</div>
+                    <h4>Step 1</h4>
+                    <p><strong>Setup</strong></p>
+                    <p>Enable USB debugging & connect phone</p>
+                </div>
+                
+                <div class="visual-step">
+                    <div class="icon-large">📸</div>
+                    <h4>Step 2</h4>
+                    <p><strong>Photos & Videos</strong></p>
+                    <p>Backup DCIM folder</p>
+                </div>
+                
+                <div class="visual-step">
+                    <div class="icon-large">💬</div>
+                    <h4>Step 3</h4>
+                    <p><strong>WhatsApp</strong></p>
+                    <p>Backup both main & clone</p>
+                </div>
+                
+                <div class="visual-step">
+                    <div class="icon-large">✅</div>
+                    <h4>Step 4</h4>
+                    <p><strong>Verify</strong></p>
+                    <p>Check all backups complete</p>
+                </div>
             </div>
 
             <div class="toc">
@@ -445,9 +681,21 @@
                         <p>Download the official Android SDK Platform Tools:</p>
                         <div class="download-section">
                             <h3>📥 Download Links</h3>
-                            <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">Windows ADB Tools</a>
-                            <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">Mac ADB Tools</a>
-                            <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">Linux ADB Tools</a>
+                            <p style="margin-bottom: 20px;">Choose your operating system:</p>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                                <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">
+                                    <div style="font-size: 2em; margin-bottom: 5px;">🪟</div>
+                                    Windows ADB Tools
+                                </a>
+                                <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">
+                                    <div style="font-size: 2em; margin-bottom: 5px;">🍎</div>
+                                    Mac ADB Tools
+                                </a>
+                                <a href="https://developer.android.com/tools/releases/platform-tools" class="download-btn" target="_blank">
+                                    <div style="font-size: 2em; margin-bottom: 5px;">🐧</div>
+                                    Linux ADB Tools
+                                </a>
+                            </div>
                         </div>
                         
                         <div class="tip">
@@ -455,6 +703,26 @@
                         </div>
 
                         <p><strong>Installation Steps:</strong></p>
+                        <div class="visual-guide">
+                            <div class="visual-step">
+                                <div class="icon-large">📦</div>
+                                <h4>1. Download ZIP</h4>
+                                <p>Download platform-tools ZIP for your OS</p>
+                            </div>
+                            
+                            <div class="visual-step">
+                                <div class="icon-large">📂</div>
+                                <h4>2. Extract</h4>
+                                <p>Extract to <code>C:\adb</code> folder</p>
+                            </div>
+                            
+                            <div class="visual-step">
+                                <div class="icon-large">⌨️</div>
+                                <h4>3. Open CMD</h4>
+                                <p>Open Command Prompt and navigate to folder</p>
+                            </div>
+                        </div>
+
                         <ol>
                             <li>Download the ZIP file for your operating system</li>
                             <li>Extract to <code>C:\adb</code> (Windows) or <code>/usr/local/adb</code> (Mac/Linux)</li>
@@ -469,14 +737,64 @@
                     <span class="step-title">Enable USB Debugging on Your Phone</span>
                     <div class="step-content">
                         <p><strong>Follow these steps exactly:</strong></p>
-                        <ol>
-                            <li>Go to <strong>Settings</strong> → <strong>About Phone</strong></li>
-                            <li>Tap <strong>Software Information</strong></li>
-                            <li>Tap <strong>Build Number</strong> 7 times (you'll see "Developer mode enabled")</li>
-                            <li>Go back to <strong>Settings</strong> → <strong>Developer Options</strong></li>
-                            <li>Enable <strong>USB Debugging</strong></li>
-                            <li>Enable <strong>USB Debugging (Security Settings)</strong> if available</li>
-                        </ol>
+                        
+                        <div class="visual-guide">
+                            <div class="visual-step">
+                                <div class="icon-large">⚙️</div>
+                                <h4>Step 1</h4>
+                                <p>Open <strong>Settings</strong></p>
+                                <p>↓</p>
+                                <p><strong>About Phone</strong></p>
+                                <p>↓</p>
+                                <p><strong>Software Information</strong></p>
+                            </div>
+                            
+                            <div class="visual-step">
+                                <div class="icon-large">👆</div>
+                                <h4>Step 2</h4>
+                                <p>Tap <strong>Build Number</strong></p>
+                                <p style="font-size: 2em; margin: 10px 0;">7×</p>
+                                <p>You'll see:</p>
+                                <p style="color: #28a745; font-weight: bold;">"Developer mode enabled"</p>
+                            </div>
+                            
+                            <div class="visual-step">
+                                <div class="icon-large">🔧</div>
+                                <h4>Step 3</h4>
+                                <p>Go back to Settings</p>
+                                <p>↓</p>
+                                <p><strong>Developer Options</strong></p>
+                                <p>↓</p>
+                                <p>Enable USB Debugging</p>
+                            </div>
+                        </div>
+
+                        <div class="phone-screen">
+                            <div class="phone-display">
+                                <div class="phone-notch"></div>
+                                <div class="phone-content">
+                                    <div class="settings-header">
+                                        ← Developer Options
+                                    </div>
+                                    <div class="settings-item">
+                                        <span>Developer options</span>
+                                        <div class="toggle-switch active"></div>
+                                    </div>
+                                    <div class="settings-item">
+                                        <span><strong>USB debugging</strong></span>
+                                        <div class="toggle-switch active"></div>
+                                    </div>
+                                    <div class="settings-item">
+                                        <span>Install via USB</span>
+                                        <div class="toggle-switch"></div>
+                                    </div>
+                                    <div class="settings-item">
+                                        <span>USB debugging (Security settings)</span>
+                                        <div class="toggle-switch active"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="warning">
                             <strong>⚠️ Important:</strong> Keep your phone unlocked during the entire backup process
@@ -490,16 +808,27 @@
                     <div class="step-content">
                         <p>Connect your phone to your computer via USB cable</p>
                         
+                        <div class="connection-visual">
+                            <div class="device-icon">
+                                <div class="icon-large">📱</div>
+                                <p><strong>Galaxy S21 Ultra</strong></p>
+                            </div>
+                            <div class="arrow-icon pulse">⟺</div>
+                            <div class="device-icon">
+                                <div class="icon-large">💻</div>
+                                <p><strong>Your Computer</strong></p>
+                            </div>
+                        </div>
+                        
                         <p><strong>Verify the connection:</strong></p>
-                        <div class="code-block">
-                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                            <code>adb devices</code>
+                        <div class="cmd-window">
+                            <div class="cmd-prompt">C:\adb\platform-tools&gt; adb devices</div>
                         </div>
 
                         <p><strong>Expected Output:</strong></p>
-                        <div class="code-block">
-                            <code>List of devices attached
-R3CR30HBKXN     device</code>
+                        <div class="cmd-window">
+                            <div class="cmd-output">List of devices attached</div>
+                            <div class="cmd-output">R3CR30HBKXN     device</div>
                         </div>
 
                         <div class="tip">
@@ -711,12 +1040,53 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                     <span class="step-number">1</span>
                     <span class="step-title">Connect Phone to Computer</span>
                     <div class="step-content">
+                        <div class="connection-visual">
+                            <div class="device-icon">
+                                <div class="icon-large">📱</div>
+                                <p><strong>Galaxy S21 Ultra</strong></p>
+                            </div>
+                            <div class="arrow-icon pulse">🔌⟺🔌</div>
+                            <div class="device-icon">
+                                <div class="icon-large">💻</div>
+                                <p><strong>Your Computer</strong></p>
+                            </div>
+                        </div>
+
                         <ol>
                             <li>Connect your Samsung Galaxy S21 Ultra to your computer using a USB cable</li>
                             <li>On your phone, swipe down the notification panel</li>
                             <li>Tap on "USB for file transfer"</li>
                             <li>Select "Transferring files / Android Auto"</li>
                         </ol>
+
+                        <div class="phone-screen">
+                            <div class="phone-display">
+                                <div class="phone-notch"></div>
+                                <div class="phone-content">
+                                    <div class="settings-header">
+                                        USB preferences
+                                    </div>
+                                    <div style="padding: 20px;">
+                                        <p style="margin-bottom: 20px; color: #666;">Use USB to...</p>
+                                        
+                                        <div style="background: #667eea; color: white; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                                            <strong>📁 File Transfer / Android Auto</strong>
+                                            <div style="font-size: 0.8em; opacity: 0.9; margin-top: 5px;">Transfer files to Windows/Mac/Linux</div>
+                                        </div>
+                                        
+                                        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                                            <strong>🔌 Charging only</strong>
+                                            <div style="font-size: 0.8em; color: #666; margin-top: 5px;">No data transfer</div>
+                                        </div>
+                                        
+                                        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 10px;">
+                                            <strong>📷 PTP (Picture Transfer)</strong>
+                                            <div style="font-size: 0.8em; color: #666; margin-top: 5px;">Transfer photos only</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="tip">
                             <strong>💡 Tip:</strong> If your computer doesn't recognize the phone, try a different USB cable or port
@@ -734,6 +1104,52 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                             <li>Double-click to open your phone</li>
                             <li>Open "Internal storage" or "Phone"</li>
                         </ol>
+
+                        <div class="file-explorer-mockup">
+                            <div class="explorer-toolbar">
+                                <strong>← →</strong> &nbsp;&nbsp; File &nbsp; Home &nbsp; Share &nbsp; View
+                                <div class="explorer-address">
+                                    📁 This PC &gt; Galaxy S21 Ultra &gt; Internal storage
+                                </div>
+                            </div>
+                            <div class="explorer-content">
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>DCIM</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Camera photos and videos</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>Download</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Downloaded files</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>WhatsApp</strong>
+                                        <div style="font-size: 0.8em; color: #666;">WhatsApp media and backups</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>Documents</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Document files</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>Music</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Music files</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -794,7 +1210,51 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                     <span class="step-number">7</span>
                     <span class="step-title">Locate and Copy WhatsApp Clone Data</span>
                     <div class="step-content">
+                        <div class="warning">
+                            <strong>⚠️ Important:</strong> Clone apps store data in different locations. Look carefully!
+                        </div>
+
                         <p><strong>For Samsung Secure Folder:</strong></p>
+                        
+                        <div class="file-explorer-mockup">
+                            <div class="explorer-toolbar">
+                                <strong>← →</strong> &nbsp;&nbsp; Search: WhatsApp
+                                <div class="explorer-address">
+                                    📁 This PC &gt; Galaxy S21 Ultra &gt; Internal storage
+                                </div>
+                            </div>
+                            <div class="explorer-content">
+                                <div class="folder-item" style="background: #fff3cd;">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>150</strong> or <strong>151</strong>
+                                        <div style="font-size: 0.8em; color: #856404;">← Secure Folder / Clone partition</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>WhatsApp</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Main WhatsApp</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item" style="background: #d1ecf1;">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>WhatsApp_2</strong>
+                                        <div style="font-size: 0.8em; color: #0c5460;">← Could be clone location</div>
+                                    </div>
+                                </div>
+                                <div class="folder-item">
+                                    <span class="folder-icon">📁</span>
+                                    <div>
+                                        <strong>Android</strong>
+                                        <div style="font-size: 0.8em; color: #666;">Check data folder inside</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <ol>
                             <li>In File Explorer, look for folders starting with numbers like "150", "151"</li>
                             <li>These represent different user profiles/secure folder</li>
@@ -807,6 +1267,16 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                             <li>Look for folders named <code>WhatsApp_2</code> or <code>WhatsApp Business</code></li>
                             <li>Check inside <code>Android → data</code> for com.whatsapp.w4b</li>
                         </ul>
+
+                        <div class="visual-guide">
+                            <div class="visual-step">
+                                <div class="icon-large">🔍</div>
+                                <h4>Search Method</h4>
+                                <p>Use File Explorer's search box (top-right)</p>
+                                <p>Type: <code>WhatsApp</code></p>
+                                <p>This will find all WhatsApp folders</p>
+                            </div>
+                        </div>
 
                         <div class="tip">
                             <strong>💡 Tip:</strong> Use File Explorer's search function (top right) to search for "WhatsApp" to find all related folders
@@ -836,6 +1306,54 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                 <span class="step-number">✓</span>
                 <span class="step-title">Verify Your Backup</span>
                 <div class="step-content">
+                    <p><strong>Your backup folder should look like this:</strong></p>
+                    
+                    <div class="file-explorer-mockup">
+                        <div class="explorer-toolbar">
+                            <strong>← →</strong> &nbsp;&nbsp; File &nbsp; Home &nbsp; Share &nbsp; View
+                            <div class="explorer-address">
+                                📁 C:\ &gt; Samsung_Backup
+                            </div>
+                        </div>
+                        <div class="explorer-content">
+                            <div class="folder-item">
+                                <span class="folder-icon">📁</span>
+                                <div>
+                                    <strong>DCIM</strong>
+                                    <div style="font-size: 0.8em; color: #28a745;">✓ 15.2 GB - 3,425 files</div>
+                                </div>
+                            </div>
+                            <div class="folder-item">
+                                <span class="folder-icon">📁</span>
+                                <div>
+                                    <strong>Downloads</strong>
+                                    <div style="font-size: 0.8em; color: #28a745;">✓ 2.8 GB - 456 files</div>
+                                </div>
+                            </div>
+                            <div class="folder-item">
+                                <span class="folder-icon">📁</span>
+                                <div>
+                                    <strong>WhatsApp</strong>
+                                    <div style="font-size: 0.8em; color: #28a745;">✓ 8.5 GB - 1,234 files</div>
+                                </div>
+                            </div>
+                            <div class="folder-item">
+                                <span class="folder-icon">📁</span>
+                                <div>
+                                    <strong>WhatsApp_Clone</strong>
+                                    <div style="font-size: 0.8em; color: #28a745;">✓ 4.2 GB - 789 files</div>
+                                </div>
+                            </div>
+                            <div class="folder-item">
+                                <span class="folder-icon">📁</span>
+                                <div>
+                                    <strong>Documents</strong>
+                                    <div style="font-size: 0.8em; color: #28a745;">✓ 1.5 GB - 234 files</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <p><strong>Before deleting anything from your phone:</strong></p>
                     <ol>
                         <li>Check the total size of your backup matches your phone's used storage</li>
@@ -863,19 +1381,43 @@ adb pull /sdcard/Android/data/com.whatsapp.w4b C:\Samsung_Backup\WhatsApp_Clone<
                 <span class="step-title">Create Multiple Backup Copies</span>
                 <div class="step-content">
                     <p><strong>Recommended backup strategy (3-2-1 rule):</strong></p>
-                    <ol>
-                        <li><strong>3</strong> copies of your data</li>
-                        <li><strong>2</strong> different storage types (e.g., computer + external drive)</li>
-                        <li><strong>1</strong> copy offsite (cloud storage)</li>
-                    </ol>
+                    
+                    <div class="visual-guide">
+                        <div class="visual-step">
+                            <div class="icon-large">3️⃣</div>
+                            <h4>3 Copies</h4>
+                            <p>Keep <strong>3 copies</strong> of your data</p>
+                            <p>📱 Original + 💻 Backup 1 + 💾 Backup 2</p>
+                        </div>
+                        
+                        <div class="visual-step">
+                            <div class="icon-large">2️⃣</div>
+                            <h4>2 Media Types</h4>
+                            <p>Store on <strong>2 different</strong> storage types</p>
+                            <p>💻 Computer HDD + 💾 External Drive</p>
+                        </div>
+                        
+                        <div class="visual-step">
+                            <div class="icon-large">1️⃣</div>
+                            <h4>1 Offsite</h4>
+                            <p>Keep <strong>1 copy offsite</strong></p>
+                            <p>☁️ Cloud Storage</p>
+                        </div>
+                    </div>
 
                     <div class="tip">
                         <strong>💡 Suggested Backup Locations:</strong>
-                        <ul>
-                            <li>Primary: Computer hard drive</li>
-                            <li>Secondary: External USB drive or NAS</li>
-                            <li>Cloud: Google Drive, OneDrive, or personal cloud server</li>
-                        </ul>
+                        <div style="margin-top: 15px;">
+                            <div style="padding: 10px; background: white; border-radius: 5px; margin-bottom: 10px;">
+                                <strong>📁 Primary:</strong> Computer hard drive (C:\Samsung_Backup)
+                            </div>
+                            <div style="padding: 10px; background: white; border-radius: 5px; margin-bottom: 10px;">
+                                <strong>💾 Secondary:</strong> External USB drive or NAS server
+                            </div>
+                            <div style="padding: 10px; background: white; border-radius: 5px;">
+                                <strong>☁️ Cloud:</strong> Google Drive, OneDrive, or personal cloud server
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
