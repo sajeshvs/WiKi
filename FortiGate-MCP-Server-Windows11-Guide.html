@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortiGate MCP Server - Windows 11 Configuration Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .inline-code {
+            background: #f4f4f4;
+            color: #d63384;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .box-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .requirement-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .requirement-card h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .requirement-card ul {
+            margin-left: 20px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .command-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .command-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .command-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 15px;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        .folder-structure {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+        }
+
+        .folder-structure pre {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #667eea;
+            font-size: 1em;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #667eea;
+            font-weight: bold;
+        }
+
+        .tab-button:hover {
+            background: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .badge-new {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-important {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-optional {
+            background: #6c757d;
+            color: white;
+        }
+
+        .footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .nav {
+                position: static;
+            }
+            .code-block {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .nav-links {
+                flex-direction: column;
+            }
+            .content {
+                padding: 20px;
+            }
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛡️ FortiGate MCP Server</h1>
+            <p>Complete Windows 11 Configuration Guide</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav">
+            <div class="nav-title">📑 Quick Navigation</div>
+            <div class="nav-links">
+                <a href="#prerequisites">Prerequisites</a>
+                <a href="#installation">Installation</a>
+                <a href="#configuration">Configuration</a>
+                <a href="#deployment">Deployment</a>
+                <a href="#cursor">Cursor IDE</a>
+                <a href="#testing">Testing</a>
+                <a href="#troubleshooting">Troubleshooting</a>
+                <a href="#api">API Commands</a>
+                <a href="#security">Security</a>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            
+            <!-- Introduction -->
+            <div class="section">
+                <h2>📖 Introduction</h2>
+                <p>This comprehensive guide will walk you through setting up the FortiGate MCP Server on Windows 11. The MCP (Model Context Protocol) server enables programmatic management of FortiGate firewalls through Cursor IDE and other MCP-compatible tools.</p>
+                
+                <div class="info-box">
+                    <div class="box-title">🎯 What You'll Accomplish</div>
+                    <ul>
+                        <li>Install and configure FortiGate MCP Server on Windows 11</li>
+                        <li>Connect to your FortiGate device via API</li>
+                        <li>Integrate with Cursor IDE for AI-powered firewall management</li>
+                        <li>Test and verify your setup</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Prerequisites -->
+            <div class="section" id="prerequisites">
+                <h2>✅ Prerequisites</h2>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <h4>💻 System Requirements</h4>
+                        <ul>
+                            <li>Windows 11 (22H2 or later)</li>
+                            <li>4GB RAM minimum</li>
+                            <li>500MB free disk space</li>
+                            <li>Administrator privileges</li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-card">
+                        <h4>🔧 Software Required</h4>
+                        <ul>
+                            <li><a href="https://www.python.org/downloads/" target="_blank">Python 3.8+</a></li>
+                            <li><a href="https://git-scm.com/download/win" target="_blank">Git for Windows</a></li>
+                            <li><a href="https://cursor.sh/" target="_blank">Cursor IDE</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-card">
+                        <h4>🛡️ FortiGate Requirements</h4>
+                        <ul>
+                            <li>FortiGate device with FortiOS 6.0+</li>
+                            <li>API access enabled</li>
+                            <li>Valid API token or admin credentials</li>
+                            <li>Network connectivity (HTTPS/443)</li>
+                        </ul>
+                    </div>
+
+                    <div class="requirement-card">
+                        <h4>🌐 Network Requirements</h4>
+                        <ul>
+                            <li>Access to FortiGate management IP</li>
+                            <li>Port 443 (HTTPS) connectivity</li>
+                            <li>Port 8814 available locally</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Installation -->
+            <div class="section" id="installation">
+                <h2>🔧 Installation</h2>
+
+                <!-- Step 1: Python -->
+                <h3><span class="step-number">1</span>Install Python</h3>
+                
+                <h4>Download Python</h4>
+                <ol>
+                    <li>Visit <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+                    <li>Download Python 3.11 or later for Windows</li>
+                    <li>Run the installer</li>
+                </ol>
+
+                <div class="warning-box">
+                    <div class="box-title">⚠️ Important Installation Options</div>
+                    <ul>
+                        <li>✅ Check "Add Python to PATH"</li>
+                        <li>✅ Check "Install pip"</li>
+                        <li>✅ Choose "Install Now" or "Customize Installation"</li>
+                    </ul>
+                </div>
+
+                <h4>Verify Installation</h4>
+                <p>Open <strong>Command Prompt</strong> or <strong>Windows Terminal</strong> and run:</p>
+                <div class="code-block" data-lang="cmd">python --version
+pip --version</div>
+
+                <div class="success-box">
+                    <div class="box-title">✅ Expected Output</div>
+                    <div class="code-block" data-lang="output">Python 3.11.x
+pip 23.x.x</div>
+                </div>
+
+                <!-- Step 2: Git -->
+                <h3><span class="step-number">2</span>Install Git for Windows</h3>
+                <ol>
+                    <li>Download from <a href="https://git-scm.com/download/win" target="_blank">git-scm.com</a></li>
+                    <li>Run the installer with default settings</li>
+                    <li>Verify installation:</li>
+                </ol>
+                <div class="code-block" data-lang="cmd">git --version</div>
+
+                <!-- Step 3: Clone Repository -->
+                <h3><span class="step-number">3</span>Clone the Repository</h3>
+                
+                <h4>Create Project Directory</h4>
+                <div class="code-block" data-lang="cmd">cd C:\
+mkdir Projects
+cd Projects</div>
+
+                <h4>Clone Repository</h4>
+                <div class="code-block" data-lang="cmd">git clone &lt;repository-url&gt;
+cd fortigate-mcp-server</div>
+
+                <div class="info-box">
+                    <div class="box-title">💡 Tip</div>
+                    Replace <code>&lt;repository-url&gt;</code> with the actual repository URL provided by your administrator or from GitHub.
+                </div>
+
+                <!-- Step 4: Virtual Environment -->
+                <h3><span class="step-number">4</span>Set Up Python Virtual Environment</h3>
+                
+                <h4>Create Virtual Environment</h4>
+                <div class="code-block" data-lang="cmd">python -m venv .venv</div>
+
+                <h4>Activate Virtual Environment</h4>
+                <div class="code-block" data-lang="cmd">.venv\Scripts\activate</div>
+
+                <div class="success-box">
+                    <div class="box-title">✅ Success Indicator</div>
+                    Your command prompt should now show <code>(.venv)</code> at the beginning, indicating the virtual environment is active.
+                </div>
+
+                <h4>Upgrade pip and Install Dependencies</h4>
+                <div class="code-block" data-lang="cmd">python -m pip install --upgrade pip
+pip install -r requirements.txt</div>
+
+                <div class="info-box">
+                    <div class="box-title">📦 What Gets Installed</div>
+                    This command installs all required Python packages including FastMCP, FortiGate API libraries, and their dependencies.
+                </div>
+            </div>
+
+            <!-- Configuration will continue in next chunk -->
+
+            <!-- Configuration -->
+            <div class="section" id="configuration">
+                <h2>⚙️ Configuration</h2>
+
+                <h3><span class="step-number">1</span>Prepare Configuration File</h3>
+                
+                <h4>Navigate to Config Directory</h4>
+                <div class="code-block" data-lang="cmd">cd config</div>
+
+                <h4>Create Configuration File</h4>
+                <div class="code-block" data-lang="cmd">copy config.example.json config.json</div>
+
+                <h4>Edit Configuration</h4>
+                <div class="code-block" data-lang="cmd">notepad config.json</div>
+
+                <h3><span class="step-number">2</span>Configure FortiGate Connection</h3>
+
+                <div class="tabs">
+                    <button class="tab-button active" onclick="openTab(event, 'basic-config')">Basic Configuration</button>
+                    <button class="tab-button" onclick="openTab(event, 'multi-device')">Multiple Devices</button>
+                    <button class="tab-button" onclick="openTab(event, 'advanced-config')">Advanced Options</button>
+                </div>
+
+                <div id="basic-config" class="tab-content active">
+                    <h4>Basic Configuration Template</h4>
+                    <div class="code-block" data-lang="json">{
+  "fortigate": {
+    "devices": {
+      "primary-fw": {
+        "host": "192.168.1.1",
+        "port": 443,
+        "username": "",
+        "password": "",
+        "api_token": "your-fortigate-api-token-here",
+        "vdom": "root",
+        "verify_ssl": false,
+        "timeout": 30
+      }
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "./logs/fortigate_mcp.log"
+  }
+}</div>
+                </div>
+
+                <div id="multi-device" class="tab-content">
+                    <h4>Multiple FortiGate Devices</h4>
+                    <div class="code-block" data-lang="json">{
+  "fortigate": {
+    "devices": {
+      "primary-fw": {
+        "host": "192.168.1.1",
+        "port": 443,
+        "api_token": "token-for-primary",
+        "vdom": "root",
+        "verify_ssl": false,
+        "timeout": 30
+      },
+      "backup-fw": {
+        "host": "192.168.1.2",
+        "port": 443,
+        "api_token": "token-for-backup",
+        "vdom": "root",
+        "verify_ssl": false,
+        "timeout": 30
+      }
+    }
+  }
+}</div>
+                </div>
+
+                <div id="advanced-config" class="tab-content">
+                    <h4>Advanced Configuration Options</h4>
+                    <table class="command-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                        <tr>
+                            <td><code>host</code></td>
+                            <td>FortiGate IP address or hostname</td>
+                            <td>Required</td>
+                        </tr>
+                        <tr>
+                            <td><code>port</code></td>
+                            <td>HTTPS port for API access</td>
+                            <td>443</td>
+                        </tr>
+                        <tr>
+                            <td><code>api_token</code></td>
+                            <td>API authentication token (recommended)</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><code>vdom</code></td>
+                            <td>Virtual Domain name</td>
+                            <td>"root"</td>
+                        </tr>
+                        <tr>
+                            <td><code>verify_ssl</code></td>
+                            <td>Verify SSL certificates</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td><code>timeout</code></td>
+                            <td>Request timeout in seconds</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3><span class="step-number">3</span>Obtain FortiGate API Token</h3>
+
+                <div class="warning-box">
+                    <div class="box-title">🔑 API Token vs Username/Password</div>
+                    <strong>Recommended:</strong> Use API tokens for better security and audit logging.
+                </div>
+
+                <h4>On Your FortiGate Device:</h4>
+                <ol>
+                    <li><strong>Login to FortiGate</strong>: <code>https://&lt;fortigate-ip&gt;</code></li>
+                    <li><strong>Create REST API Admin</strong>: Navigate to <strong>System</strong> → <strong>Administrators</strong> → <strong>Create New</strong> → <strong>REST API Admin</strong></li>
+                    <li><strong>Configure API User</strong>
+                        <div class="code-block" data-lang="config">Username: mcp-api-user
+Administrator Profile: Super_Admin
+✅ Enable: Regenerate</div>
+                    </li>
+                    <li><strong>Generate Token</strong>: Click <strong>OK</strong> and copy the token immediately</li>
+                </ol>
+
+                <div class="danger-box">
+                    <div class="box-title">🔒 Security Warning</div>
+                    <ul>
+                        <li>Store your API token securely</li>
+                        <li>Never commit tokens to version control</li>
+                        <li>The token is shown only once</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Deployment -->
+            <div class="section" id="deployment">
+                <h2>🚀 Server Deployment</h2>
+
+                <h3>Method 1: Direct Python Execution</h3>
+                <p><span class="badge badge-new">Recommended for Testing</span></p>
+
+                <h4>Start Server</h4>
+                <div class="code-block" data-lang="cmd">cd C:\Projects\fortigate-mcp-server
+.venv\Scripts\activate
+python -m src.fortigate_mcp.server_http --host 0.0.0.0 --port 8814 --path /fortigate-mcp --config config/config.json</div>
+
+                <div class="success-box">
+                    <div class="box-title">✅ Server Running</div>
+                    Look for: <code>Starting MCP server on http://0.0.0.0:8814/fortigate-mcp</code>
+                </div>
+
+                <h3>Method 2: PowerShell Script</h3>
+
+                <h4>Create start_server.ps1</h4>
+                <div class="code-block" data-lang="powershell"># start_server.ps1
+$ErrorActionPreference = "Stop"
+Write-Host "Starting FortiGate MCP Server..." -ForegroundColor Green
+Set-Location "C:\Projects\fortigate-mcp-server"
+& .\.venv\Scripts\Activate.ps1
+python -m src.fortigate_mcp.server_http --host 0.0.0.0 --port 8814 --path /fortigate-mcp --config config/config.json</div>
+
+                <h4>Run Script</h4>
+                <div class="code-block" data-lang="powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\start_server.ps1</div>
+
+                <h3>Method 3: Windows Service (Production)</h3>
+
+                <h4>Install NSSM</h4>
+                <div class="code-block" data-lang="powershell">choco install nssm</div>
+
+                <h4>Create Service</h4>
+                <div class="code-block" data-lang="cmd">nssm install FortiGateMCP "C:\Projects\fortigate-mcp-server\.venv\Scripts\python.exe" "-m src.fortigate_mcp.server_http --host 0.0.0.0 --port 8814 --path /fortigate-mcp --config config/config.json"
+nssm set FortiGateMCP AppDirectory "C:\Projects\fortigate-mcp-server"
+net start FortiGateMCP</div>
+            </div>
+
+            <!-- Cursor Integration -->
+            <div class="section" id="cursor">
+                <h2>🎨 Cursor IDE Integration</h2>
+
+                <h3><span class="step-number">1</span>Configure MCP</h3>
+                <div class="code-block" data-lang="cmd">cd %USERPROFILE%\.cursor
+notepad mcp_servers.json</div>
+
+                <h3><span class="step-number">2</span>Add Configuration</h3>
+                <div class="code-block" data-lang="json">{
+  "mcpServers": {
+    "FortiGateMCP": {
+      "url": "http://localhost:8814/fortigate-mcp/",
+      "transport": "http"
+    }
+  }
+}</div>
+
+                <h3><span class="step-number">3</span>Restart Cursor</h3>
+                <p>Close and restart Cursor IDE. Wait 10-15 seconds for initialization.</p>
+
+                <h3><span class="step-number">4</span>Verify Connection</h3>
+                <ol>
+                    <li>Press <code>Ctrl+Shift+P</code></li>
+                    <li>Type: <code>MCP: List Servers</code></li>
+                    <li>Verify <code>FortiGateMCP</code> is listed</li>
+                </ol>
+            </div>
+
+            <!-- Testing -->
+            <div class="section" id="testing">
+                <h2>✅ Testing & Verification</h2>
+
+                <h3>Test 1: Health Check (PowerShell)</h3>
+                <div class="code-block" data-lang="powershell">$body = @{
+    jsonrpc = "2.0"
+    id = 1
+    method = "health"
+    params = @{}
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:8814/fortigate-mcp" -Method POST -Headers @{"Content-Type"="application/json"} -Body $body</div>
+
+                <h4>Expected Response</h4>
+                <div class="code-block" data-lang="json">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "healthy",
+    "timestamp": "2025-10-26T10:30:00"
+  }
+}</div>
+
+                <h3>Test 2: Test Connection</h3>
+                <div class="code-block" data-lang="powershell">Test-NetConnection -ComputerName localhost -Port 8814</div>
+
+                <h3>Test 3: List Devices</h3>
+                <div class="code-block" data-lang="powershell">$body = @{
+    jsonrpc = "2.0"
+    id = 2
+    method = "list_devices"
+    params = @{}
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:8814/fortigate-mcp" -Method POST -Headers @{"Content-Type"="application/json"} -Body $body</div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section" id="troubleshooting">
+                <h2>🔍 Troubleshooting</h2>
+
+                <h3>Issue 1: Python Not Found</h3>
+                <div class="danger-box">
+                    <div class="box-title">❌ Symptoms</div>
+                    <code>'python' is not recognized</code>
+                </div>
+
+                <h4>Solution</h4>
+                <ol>
+                    <li>Verify: <code>where python</code></li>
+                    <li>Add to PATH: <strong>System Properties</strong> → <strong>Environment Variables</strong> → Edit <strong>Path</strong></li>
+                    <li>Add: <code>C:\Users\YourUsername\AppData\Local\Programs\Python\Python311</code></li>
+                </ol>
+
+                <h3>Issue 2: Port Already in Use</h3>
+                <div class="code-block" data-lang="powershell"># Find process
+netstat -ano | findstr :8814
+
+# Kill process (replace PID)
+taskkill /PID &lt;PID&gt; /F</div>
+
+                <h3>Issue 3: Cannot Connect to FortiGate</h3>
+                <ul>
+                    <li><strong>Test connectivity</strong>: <code>Test-NetConnection -ComputerName 192.168.1.1 -Port 443</code></li>
+                    <li><strong>SSL issues</strong>: Set <code>"verify_ssl": false</code></li>
+                    <li><strong>API access</strong>: Enable REST API in FortiGate</li>
+                </ul>
+
+                <h3>Issue 4: Cursor Cannot Connect</h3>
+                <ol>
+                    <li>Verify server is running: <code>Test-NetConnection -ComputerName localhost -Port 8814</code></li>
+                    <li>Check <code>mcp_servers.json</code> syntax</li>
+                    <li>Review logs: <code>%USERPROFILE%\.cursor\logs</code></li>
+                    <li>Restart server and Cursor</li>
+                </ol>
+
+                <h3>Viewing Logs</h3>
+                <div class="code-block" data-lang="powershell">Get-Content C:\Projects\fortigate-mcp-server\logs\fortigate_mcp.log -Wait -Tail 50</div>
+            </div>
+
+            <!-- API Commands -->
+            <div class="section" id="api">
+                <h2>📚 Available API Commands</h2>
+
+                <h3>Device Management</h3>
+                <table class="command-table">
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>list_devices</code></td>
+                        <td>List all configured devices</td>
+                    </tr>
+                    <tr>
+                        <td><code>get_device_status</code></td>
+                        <td>Get device system status</td>
+                    </tr>
+                    <tr>
+                        <td><code>test_device_connection</code></td>
+                        <td>Test connectivity</td>
+                    </tr>
+                </table>
+
+                <h3>Firewall Policies</h3>
+                <table class="command-table">
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>list_firewall_policies</code></td>
+                        <td>List all firewall rules</td>
+                    </tr>
+                    <tr>
+                        <td><code>create_firewall_policy</code></td>
+                        <td>Create new rule</td>
+                    </tr>
+                    <tr>
+                        <td><code>update_firewall_policy</code></td>
+                        <td>Modify rule</td>
+                    </tr>
+                </table>
+
+                <h3>Network Objects</h3>
+                <table class="command-table">
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>list_address_objects</code></td>
+                        <td>List address objects</td>
+                    </tr>
+                    <tr>
+                        <td><code>create_address_object</code></td>
+                        <td>Create address object</td>
+                    </tr>
+                    <tr>
+                        <td><code>list_service_objects</code></td>
+                        <td>List service objects</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Security -->
+            <div class="section" id="security">
+                <h2>🔒 Security Best Practices</h2>
+
+                <h3>1. API Token Management</h3>
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <h4>✅ DO</h4>
+                        <ul>
+                            <li>Generate unique tokens per app</li>
+                            <li>Store tokens securely</li>
+                            <li>Rotate tokens quarterly</li>
+                            <li>Use minimum privileges</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-card">
+                        <h4>❌ DON'T</h4>
+                        <ul>
+                            <li>Share tokens</li>
+                            <li>Commit to version control</li>
+                            <li>Use super_admin unnecessarily</li>
+                            <li>Store in plain text</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>2. Network Security</h3>
+                <div class="code-block" data-lang="powershell"># Restrict to localhost only
+New-NetFirewallRule -DisplayName "FortiGate MCP" -Direction Inbound -LocalAddress 127.0.0.1 -LocalPort 8814 -Protocol TCP -Action Allow</div>
+
+                <h3>3. Logging</h3>
+                <div class="code-block" data-lang="json">{
+  "logging": {
+    "level": "INFO",
+    "file": "./logs/fortigate_mcp.log",
+    "max_size": 10485760
+  }
+}</div>
+            </div>
+
+            <!-- Project Structure -->
+            <div class="section">
+                <h2>📁 Project Structure</h2>
+                <div class="folder-structure">
+<pre>C:\Projects\fortigate-mcp-server\
+├── .venv\              # Virtual environment
+├── config\
+│   └── config.json     # Configuration
+├── logs\
+│   └── fortigate_mcp.log
+├── src\
+│   └── fortigate_mcp\
+│       └── server_http.py
+└── requirements.txt</pre>
+                </div>
+            </div>
+
+            <!-- Quick Reference -->
+            <div class="section">
+                <h2>⚡ Quick Reference</h2>
+
+                <h3>Start Server</h3>
+                <div class="code-block" data-lang="cmd">cd C:\Projects\fortigate-mcp-server
+.venv\Scripts\activate
+python -m src.fortigate_mcp.server_http --host localhost --port 8814 --path /fortigate-mcp --config config/config.json</div>
+
+                <h3>Test Health</h3>
+                <div class="code-block" data-lang="powershell">Test-NetConnection -ComputerName localhost -Port 8814</div>
+
+                <h3>View Logs</h3>
+                <div class="code-block" data-lang="powershell">Get-Content logs\fortigate_mcp.log -Wait -Tail 50</div>
+
+                <h3>Stop Server</h3>
+                <div class="code-block" data-lang="cmd">taskkill /F /IM python.exe</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3>🛡️ FortiGate MCP Server</h3>
+            <p>Windows 11 Configuration Guide</p>
+            <p style="margin-top: 20px;"><strong>Version:</strong> 1.0.0 | <strong>Updated:</strong> October 2025</p>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var tabcontents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontents.length; i++) {
+                tabcontents[i].classList.remove("active");
+            }
+            var tabbuttons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.textContent = 'Copy';
+            button.style.cssText = 'position: absolute; top: 5px; right: 10px; background: #667eea; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8em; z-index: 10;';
+            button.addEventListener('click', () => {
+                const code = block.textContent.replace('Copy', '').trim();
+                navigator.clipboard.writeText(code).then(() => {
+                    button.textContent = 'Copied!';
+                    setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+                });
+            });
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+    </script>
+</body>
+</html>
